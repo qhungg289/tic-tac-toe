@@ -34,13 +34,15 @@ const GameBoard = (() => {
 	const renderBoard = (turnCheckAndMark) => {
 		for (let i = 0; i < board.length; i++) {
 			for (let j = 0; j < board[i].length; j++) {
-				let cell = document.createElement("div");
+				let cell = document.createElement("button");
 				cell.innerText = board[i][j];
 				cell.addEventListener(
 					"click",
 					turnCheckAndMark.bind(this, cell, i, j)
 				);
-				gridBoard.appendChild(cell).className = "grid-item";
+				cell.className = "grid-item";
+				cell.type = "button";
+				gridBoard.appendChild(cell);
 			}
 		}
 	};
@@ -49,9 +51,25 @@ const GameBoard = (() => {
 })();
 
 const GameController = ((arr, mark1, mark2) => {
+	let resultBox = document.getElementById("result");
+	let resultMessage = document.getElementById("result-message");
+	let newMatchButton = document.getElementById("new-match-button");
+	let restartButton = document.getElementById("restart-button");
+	let gridItems = document.getElementsByClassName("grid-item");
+	let p1Score = document.getElementById("player1-score");
+	let p1Name = document.getElementById("player1-name");
+	let p2Score = document.getElementById("player2-score");
+	let p2Name = document.getElementById("player2-name");
+
+	p1Name.innerText = p1.getName();
+	p2Name.innerText = p2.getName();
+	p1Score.innerText = p1.getScore();
+	p2Score.innerText = p2.getScore();
+
 	const turnCheckAndMark = (cell, index1, index2) => {
 		if (turn === true && cell.innerText === "") {
 			cell.innerText = mark1;
+			cell.innerHTML = `<i class="fas fa-times"></i>`;
 			cell.style.color = "red";
 			arr[index1][index2] = mark1;
 			checkWon();
@@ -60,6 +78,7 @@ const GameController = ((arr, mark1, mark2) => {
 			turn = false;
 		} else if (turn === false && cell.innerText === "") {
 			cell.innerText = mark2;
+			cell.innerHTML = `<i class="far fa-circle"></i>`;
 			cell.style.color = "blue";
 			arr[index1][index2] = mark2;
 			checkWon();
@@ -170,22 +189,40 @@ const GameController = ((arr, mark1, mark2) => {
 		}
 	};
 
+	newMatchButton.onclick = () => {
+		[...gridItems].forEach((e) => e.parentNode.removeChild(e));
+		for (let i = 0; i < arr.length; i++) {
+			for (let j = 0; j < arr[i].length; j++) {
+				arr[i][j] = "";
+			}
+		}
+		move = 0;
+		p1.wonStatus = false;
+		p2.wonStatus = false;
+		resultBox.style.display = "none";
+		GameBoard.renderBoard(GameController.turnCheckAndMark);
+	};
+
 	const winnerFound = () => {
 		if (p1.wonStatus === true) {
-			alert(`${p1.getName()} is the winner!`);
+			resultBox.style.display = "block";
+			resultMessage.innerText = `${p1.getName()} is the winner 🎉!`;
+			p1.setScore();
+			p1Score.innerText = p1.getScore();
 		} else if (p2.wonStatus === true) {
-			alert(`${p2.getName()} is the winner!`);
+			resultBox.style.display = "block";
+			resultMessage.innerText = `${p2.getName()} is the winner 🎉!`;
+			p2.setScore();
+			p2Score.innerText = p2.getScore();
 		} else if (
 			move === 8 &&
 			p1.wonStatus === false &&
 			p2.wonStatus === false
 		) {
-			alert("Tie!");
+			resultBox.style.display = "block";
+			resultMessage.innerText = "Tie!";
 		}
 	};
-
-	let gridItems = document.getElementsByClassName("grid-item");
-	let restartButton = document.getElementById("restart-button");
 
 	restartButton.onclick = () => {
 		[...gridItems].forEach((e) => e.parentNode.removeChild(e));
@@ -199,5 +236,6 @@ const GameController = ((arr, mark1, mark2) => {
 		p2.wonStatus = false;
 		GameBoard.renderBoard(GameController.turnCheckAndMark);
 	};
+
 	return { turnCheckAndMark };
 })(GameBoard.board, p1.mark, p2.mark);
