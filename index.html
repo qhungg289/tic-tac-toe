@@ -18,16 +18,49 @@
 	</head>
 	<body>
 		<h1>Tic-tac-toe</h1>
+
 		<div class="modal" id="result">
 			<div class="modal-content">
 				<p id="result-message"></p>
 				<button type="button" id="new-match-button">New match</button>
 			</div>
 		</div>
+		<div class="modal" id="change-name-1-modal">
+			<div class="modal-content">
+				<p>Change Player 1 name:</p>
+				<input
+					type="text"
+					id="name-field-1"
+					autocomplete="off"
+				/><br /><br />
+				<input type="button" id="submit-1" value="OK" />
+			</div>
+		</div>
+		<div class="modal" id="change-name-2-modal">
+			<div class="modal-content">
+				<p>Change Player 2 name:</p>
+				<input
+					type="text"
+					id="name-field-2"
+					autocomplete="off"
+				/><br /><br />
+				<input type="button" id="submit-2" value="OK" />
+			</div>
+		</div>
+
 		<div id="main-container">
 			<div id="player1" class="player-info">
 				<div id="player1-score">0</div>
-				<div id="player1-name"></div>
+				<div class="name-container" id="name-container-1">
+					<div id="player1-name"></div>
+					<button
+						class="change-name"
+						id="change-name-1"
+						title="Change player's name"
+					>
+						<i class="fas fa-pen-square edit"></i>
+					</button>
+				</div>
 			</div>
 			<div id="play-area">
 				<div id="grid-container"></div>
@@ -35,7 +68,16 @@
 			</div>
 			<div id="player2" class="player-info">
 				<div id="player2-score">0</div>
-				<div id="player2-name"></div>
+				<div class="name-container" id="name-container-2">
+					<div id="player2-name"></div>
+					<button
+						class="change-name"
+						id="change-name-2"
+						title="Change player's name"
+					>
+						<i class="fas fa-pen-square edit"></i>
+					</button>
+				</div>
 			</div>
 			<script src="./script.js"></script>
 		</div>
