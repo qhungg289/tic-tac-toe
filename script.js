@@ -68,7 +68,6 @@ const GameController = ((arr, mark1, mark2) => {
 
 	const turnCheckAndMark = (cell, index1, index2) => {
 		if (turn === true && cell.innerText === "") {
-			cell.innerText = mark1;
 			cell.innerHTML = `<i class="fas fa-times"></i>`;
 			cell.style.color = "red";
 			arr[index1][index2] = mark1;
@@ -76,8 +75,8 @@ const GameController = ((arr, mark1, mark2) => {
 			winnerFound();
 			++move;
 			turn = false;
+			cell.disabled = true;
 		} else if (turn === false && cell.innerText === "") {
-			cell.innerText = mark2;
 			cell.innerHTML = `<i class="far fa-circle"></i>`;
 			cell.style.color = "blue";
 			arr[index1][index2] = mark2;
@@ -85,8 +84,7 @@ const GameController = ((arr, mark1, mark2) => {
 			winnerFound();
 			++move;
 			turn = true;
-		} else if (cell.innerText === "x" || cell.innerText === "o") {
-			alert("This box is already selected! Pick another box!");
+			cell.disabled = true;
 		}
 	};
 
