@@ -1,5 +1,13 @@
+:root {
+	--border: 4px dashed #393939;
+}
+
 html {
 	font-family: "Baloo Tammudu 2", cursive;
+}
+
+body {
+	background-color: #dedede;
 }
 
 h1 {
@@ -20,17 +28,22 @@ h1 {
 }
 
 .modal-content {
-	background-color: #fefefe;
-	margin: 10% auto;
+	background-color: #dedede;
+	margin: 15% auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 300px;
+	width: 340px;
 	border-radius: 6px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.7rem;
+}
+
+p {
+	margin: 0px;
+	font-weight: bold;
 }
 
 #main-container {
@@ -52,17 +65,32 @@ h1 {
 	width: 300px;
 	height: 300px;
 	grid-template-columns: repeat(3, 1fr);
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
 
 #restart-button,
 #new-match-button {
+	border: 3px solid gray;
+	border-radius: 6px;
 	padding: 10px;
+	transition: 0.3s;
+	font-size: 1rem;
+}
+
+#restart-button:hover,
+#new-match-button:hover {
+	border: 3px solid orange;
+}
+
+#restart-button:active,
+#new-match-button:active {
+	background-color: orange;
 }
 
 .grid-item {
-	border: 3px black solid;
+	border: none;
 	font-size: 5rem;
+	background-color: transparent;
 	width: 100px;
 	height: 100px;
 	user-select: none;
@@ -70,6 +98,27 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: background-color 0.2s;
+}
+
+.grid-item:nth-child(-n + 3) {
+	border-bottom: var(--border);
+}
+
+.grid-item:nth-child(3n + 1) {
+	border-right: var(--border);
+}
+
+.grid-item:nth-child(3n) {
+	border-left: var(--border);
+}
+
+.grid-item:nth-child(n + 7) {
+	border-top: var(--border);
+}
+
+.grid-item:active {
+	background-color: #888;
 }
 
 .player-info {
@@ -98,7 +147,7 @@ h1 {
 }
 
 #name-container-1 {
-	border-bottom: 2px red solid;
+	border-bottom: 4px red solid;
 }
 
 .change-name {
@@ -110,6 +159,12 @@ h1 {
 
 .edit {
 	font-size: 30px;
+	transition: 0.3s;
+}
+
+.edit:hover,
+.edit:active {
+	color: cornflowerblue;
 }
 
 .far {
@@ -119,10 +174,30 @@ h1 {
 input[type="text"] {
 	padding: 0.6rem;
 	width: 80%;
+	border-radius: 6px;
+	border: 3px solid gray;
+	transition: 0.3s;
+}
+
+input[type="text"]:focus {
+	outline: none;
+	border: 3px solid skyblue;
 }
 
 input[type="button"] {
-	padding: 0.6rem;
+	border: 3px solid gray;
+	border-radius: 6px;
+	padding: 10px;
+	transition: 0.3s;
 	width: 20%;
 	margin-top: 20px;
+	font-size: 1rem;
+}
+
+input[type="button"]:hover {
+	border: 3px solid orange;
+}
+
+input[type="button"]:active {
+	background-color: orange;
 }

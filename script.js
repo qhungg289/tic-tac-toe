@@ -300,11 +300,11 @@ const GameController = ((arr, mark1, mark2) => {
 
 	const turnIndicator = () => {
 		if (turn === false) {
-			p1NameContainer.style.borderBottom = "2px red solid";
+			p1NameContainer.style.borderBottom = "4px red solid";
 			p2NameContainer.style.borderBottom = "none";
 		} else {
 			p1NameContainer.style.borderBottom = "none";
-			p2NameContainer.style.borderBottom = "2px blue solid";
+			p2NameContainer.style.borderBottom = "4px blue solid";
 		}
 	};
 
