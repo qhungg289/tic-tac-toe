@@ -1,7 +1,6 @@
 let turn = true;
 let move = 0;
 
-// Factory function
 const Player = (mark) => {
 	let _name = "";
 	let _score = 0;
@@ -15,7 +14,6 @@ const Player = (mark) => {
 	return { getName, setName, getScore, setScore, mark, wonStatus };
 };
 
-// Create Players object
 let p1 = Player("x");
 let p2 = Player("o");
 p1.setName("Player 1");
@@ -30,7 +28,6 @@ const GameBoard = (() => {
 
 	let gridBoard = document.getElementById("grid-container");
 
-	// Render the array to grid
 	const renderBoard = (turnCheckAndMark) => {
 		for (let i = 0; i < board.length; i++) {
 			for (let j = 0; j < board[i].length; j++) {
