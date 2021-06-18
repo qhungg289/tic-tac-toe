@@ -11,11 +11,33 @@
 			rel="stylesheet"
 		/>
 		<link rel="shortcut icon" type="image/jpg" href="./favicon.png" />
+		<script
+			src="https://kit.fontawesome.com/313ff853e5.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body>
 		<h1>Tic-tac-toe</h1>
-		<button type="button" id="restart-button">Restart</button>
-		<div id="grid-container"></div>
-		<script src="./script.js"></script>
+		<div class="modal" id="result">
+			<div class="modal-content">
+				<p id="result-message"></p>
+				<button type="button" id="new-match-button">New match</button>
+			</div>
+		</div>
+		<div id="main-container">
+			<div id="player1" class="player-info">
+				<div id="player1-score">0</div>
+				<div id="player1-name"></div>
+			</div>
+			<div id="play-area">
+				<div id="grid-container"></div>
+				<button type="button" id="restart-button">Restart</button>
+			</div>
+			<div id="player2" class="player-info">
+				<div id="player2-score">0</div>
+				<div id="player2-name"></div>
+			</div>
+			<script src="./script.js"></script>
+		</div>
 	</body>
 </html>
