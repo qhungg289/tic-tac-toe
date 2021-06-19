@@ -150,6 +150,10 @@ p {
 	border-bottom: 4px red solid;
 }
 
+#name-container-2 {
+	border-bottom: 4px transparent solid;
+}
+
 .change-name {
 	background-color: transparent;
 	border: none;
