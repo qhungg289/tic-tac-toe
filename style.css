@@ -1,5 +1,13 @@
 :root {
-	--border: 4px dashed #393939;
+	--border: 4px dashed #73464c;
+	--borderRadius: 6px;
+	--bgcolor: #ffe7d6;
+	--textcolor: #73464c;
+	--editcolor: #ffa7a5;
+	--player1indicator: #ee6a7c;
+	--player2indicator: #34acba;
+	--boardcolor: #ffe7d6;
+	--buttoncolor: #ffe07e;
 }
 
 html {
@@ -7,12 +15,13 @@ html {
 }
 
 body {
-	background-color: #dedede;
+	background-color: var(--bgcolor);
 }
 
 h1 {
 	text-align: center;
 	font-size: 3rem;
+	color: var(--textcolor);
 }
 
 .modal {
@@ -28,12 +37,13 @@ h1 {
 }
 
 .modal-content {
-	background-color: #dedede;
+	background-color: var(--bgcolor);
+	color: var(--textcolor);
 	margin: 15% auto;
 	padding: 20px;
-	border: 1px solid #888;
+	border: none;
 	width: 340px;
-	border-radius: 6px;
+	border-radius: var(--borderRadius);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -66,15 +76,20 @@ p {
 	height: 300px;
 	grid-template-columns: repeat(3, 1fr);
 	margin-bottom: 50px;
+	padding: 10px;
+	background-color: var(--boardcolor);
+	border-radius: var(--borderRadius);
+	/* border: 10px #f4f4f4 solid; */
 }
 
 #restart-button,
 #new-match-button {
-	border: 3px solid gray;
-	border-radius: 6px;
+	border: 3px solid transparent;
+	border-radius: var(--borderRadius);
 	padding: 10px;
 	transition: 0.3s;
 	font-size: 1rem;
+	background-color: var(--buttoncolor);
 }
 
 #restart-button:hover,
@@ -117,15 +132,12 @@ p {
 	border-top: var(--border);
 }
 
-.grid-item:active {
-	background-color: #888;
-}
-
 .player-info {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	color: var(--textcolor);
 }
 
 #player1-name,
@@ -147,7 +159,7 @@ p {
 }
 
 #name-container-1 {
-	border-bottom: 4px red solid;
+	border-bottom: 4px var(--player1indicator) solid;
 }
 
 #name-container-2 {
@@ -164,11 +176,12 @@ p {
 .edit {
 	font-size: 30px;
 	transition: 0.3s;
+	color: var(--editcolor);
 }
 
 .edit:hover,
 .edit:active {
-	color: cornflowerblue;
+	color: var(--textcolor);
 }
 
 .far {
@@ -178,24 +191,26 @@ p {
 input[type="text"] {
 	padding: 0.6rem;
 	width: 80%;
-	border-radius: 6px;
-	border: 3px solid gray;
+	border-radius: var(--borderRadius);
+	border: 3px solid var(--textcolor);
 	transition: 0.3s;
+	background-color: var(--bgcolor);
+	color: var(--textcolor);
 }
 
 input[type="text"]:focus {
 	outline: none;
-	border: 3px solid skyblue;
 }
 
 input[type="button"] {
-	border: 3px solid gray;
-	border-radius: 6px;
+	border: 3px solid transparent;
+	border-radius: var(--borderRadius);
 	padding: 10px;
 	transition: 0.3s;
 	width: 20%;
 	margin-top: 20px;
 	font-size: 1rem;
+	background-color: var(--buttoncolor);
 }
 
 input[type="button"]:hover {

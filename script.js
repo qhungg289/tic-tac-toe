@@ -157,7 +157,7 @@ const GameController = ((arr, mark1, mark2) => {
 	const turnCheckAndMark = (cell, index1, index2) => {
 		if (turn === true && cell.innerHTML === "") {
 			cell.innerHTML = `<i class="fas fa-times"></i>`;
-			cell.style.color = "red";
+			cell.style.color = "var(--player1indicator)";
 			arr[index1][index2] = mark1;
 			checkWon();
 			winnerFound();
@@ -167,7 +167,7 @@ const GameController = ((arr, mark1, mark2) => {
 			cell.disabled = true;
 		} else if (turn === false && cell.innerHTML === "") {
 			cell.innerHTML = `<i class="far fa-circle"></i>`;
-			cell.style.color = "blue";
+			cell.style.color = "var(--player2indicator)";
 			arr[index1][index2] = mark2;
 			checkWon();
 			winnerFound();
@@ -300,11 +300,13 @@ const GameController = ((arr, mark1, mark2) => {
 
 	const turnIndicator = () => {
 		if (turn === false) {
-			p1NameContainer.style.borderBottom = "4px red solid";
+			p1NameContainer.style.borderBottom =
+				"4px var(--player1indicator) solid";
 			p2NameContainer.style.borderBottom = "4px transparent solid";
 		} else {
 			p1NameContainer.style.borderBottom = "4px transparent solid";
-			p2NameContainer.style.borderBottom = "4px blue solid";
+			p2NameContainer.style.borderBottom =
+				"4px var(--player2indicator) solid";
 		}
 	};
 
