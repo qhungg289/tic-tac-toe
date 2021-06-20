@@ -48,6 +48,7 @@ const GameBoard = (() => {
 })();
 
 const GameController = ((arr, mark1, mark2) => {
+	let overlay = document.getElementById("overlay");
 	let resultBox = document.getElementById("result");
 	let resultMessage = document.getElementById("result-message");
 	let newMatchButton = document.getElementById("new-match-button");
@@ -80,8 +81,9 @@ const GameController = ((arr, mark1, mark2) => {
 			event.target == p1NameEditModal ||
 			event.target == p2NameEditModal
 		) {
-			p1NameEditModal.style.display = "none";
-			p2NameEditModal.style.display = "none";
+			p1NameEditModal.classList.remove("active");
+			p2NameEditModal.classList.remove("active");
+			overlay.classList.remove("active");
 		}
 	};
 
@@ -92,7 +94,8 @@ const GameController = ((arr, mark1, mark2) => {
 			p1.setName(`${document.getElementById("name-field-1").value}`);
 			p1Name.innerText = p1.getName();
 			document.getElementById("name-field-1").value = null;
-			p1NameEditModal.style.display = "none";
+			p1NameEditModal.classList.remove("active");
+			overlay.classList.remove("active");
 		}
 	};
 
@@ -103,7 +106,8 @@ const GameController = ((arr, mark1, mark2) => {
 			p2.setName(`${document.getElementById("name-field-2").value}`);
 			p2Name.innerText = p2.getName();
 			document.getElementById("name-field-2").value = null;
-			p2NameEditModal.style.display = "none";
+			p2NameEditModal.classList.remove("active");
+			overlay.classList.remove("active");
 		}
 	};
 
@@ -129,16 +133,19 @@ const GameController = ((arr, mark1, mark2) => {
 		move = 0;
 		p1.wonStatus = false;
 		p2.wonStatus = false;
-		resultBox.style.display = "none";
+		resultBox.classList.remove("active");
+		overlay.classList.remove("active");
 		GameBoard.renderBoard(GameController.turnCheckAndMark);
 	};
 
 	p1NameEditBtn.onclick = () => {
-		p1NameEditModal.style.display = "block";
+		p1NameEditModal.classList.add("active");
+		overlay.classList.add("active");
 	};
 
 	p2NameEditBtn.onclick = () => {
-		p2NameEditModal.style.display = "block";
+		p2NameEditModal.classList.add("active");
+		overlay.classList.add("active");
 	};
 
 	restartButton.onclick = () => {
@@ -279,12 +286,14 @@ const GameController = ((arr, mark1, mark2) => {
 
 	const winnerFound = () => {
 		if (p1.wonStatus === true) {
-			resultBox.style.display = "block";
+			resultBox.classList.add("active");
+			overlay.classList.add("active");
 			resultMessage.innerText = `${p1.getName()} is the winner 🎉!`;
 			p1.setScore();
 			p1Score.innerText = p1.getScore();
 		} else if (p2.wonStatus === true) {
-			resultBox.style.display = "block";
+			resultBox.classList.add("active");
+			overlay.classList.add("active");
 			resultMessage.innerText = `${p2.getName()} is the winner 🎉!`;
 			p2.setScore();
 			p2Score.innerText = p2.getScore();
@@ -293,7 +302,8 @@ const GameController = ((arr, mark1, mark2) => {
 			p1.wonStatus === false &&
 			p2.wonStatus === false
 		) {
-			resultBox.style.display = "block";
+			resultBox.classList.add("active");
+			overlay.classList.add("active");
 			resultMessage.innerText = "Tie!";
 		}
 	};
