@@ -165,6 +165,7 @@ const GameController = ((arr, mark1, mark2) => {
 		if (turn === true && cell.innerHTML === "") {
 			cell.innerHTML = `<i class="fas fa-times"></i>`;
 			cell.style.color = "var(--player1indicator)";
+			cell.style.textShadow = "0 4px var(--textcolor)";
 			arr[index1][index2] = mark1;
 			checkWon();
 			winnerFound();
@@ -175,6 +176,7 @@ const GameController = ((arr, mark1, mark2) => {
 		} else if (turn === false && cell.innerHTML === "") {
 			cell.innerHTML = `<i class="far fa-circle"></i>`;
 			cell.style.color = "var(--player2indicator)";
+			cell.style.textShadow = "0 4px var(--textcolor)";
 			arr[index1][index2] = mark2;
 			checkWon();
 			winnerFound();
