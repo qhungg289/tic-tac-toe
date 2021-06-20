@@ -8,6 +8,7 @@
 	--player2indicator: #34acba;
 	--boardcolor: #ffe7d6;
 	--buttoncolor: #ffe07e;
+	--buttoncoloractive: #ffd34a;
 }
 
 html {
@@ -100,7 +101,6 @@ p {
 	padding: 10px;
 	background-color: var(--boardcolor);
 	border-radius: var(--borderRadius);
-	/* border: 10px #f4f4f4 solid; */
 }
 
 #restart-button,
@@ -111,16 +111,18 @@ p {
 	transition: 0.3s;
 	font-size: 1rem;
 	background-color: var(--buttoncolor);
+	box-shadow: 0 6px var(--textcolor);
 }
 
 #restart-button:hover,
 #new-match-button:hover {
-	border: 3px solid orange;
+	background-color: var(--buttoncoloractive);
 }
 
 #restart-button:active,
 #new-match-button:active {
-	background-color: orange;
+	box-shadow: 0 3px var(--textcolor);
+	transform: translateY(4px);
 }
 
 .grid-item {
@@ -233,12 +235,14 @@ input[type="button"] {
 	margin-top: 20px;
 	font-size: 1rem;
 	background-color: var(--buttoncolor);
+	box-shadow: 0 6px var(--textcolor);
 }
 
 input[type="button"]:hover {
-	border: 3px solid orange;
+	background-color: var(--buttoncoloractive);
 }
 
 input[type="button"]:active {
-	background-color: orange;
+	box-shadow: 0 3px var(--textcolor);
+	transform: translateY(4px);
 }
