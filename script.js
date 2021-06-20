@@ -314,11 +314,15 @@ const GameController = ((arr, mark1, mark2) => {
 		if (turn === false) {
 			p1NameContainer.style.borderBottom =
 				"4px var(--player1indicator) solid";
+			p1NameContainer.classList.add("active1");
 			p2NameContainer.style.borderBottom = "4px transparent solid";
+			p2NameContainer.classList.remove("active2");
 		} else {
 			p1NameContainer.style.borderBottom = "4px transparent solid";
+			p1NameContainer.classList.remove("active1");
 			p2NameContainer.style.borderBottom =
 				"4px var(--player2indicator) solid";
+			p2NameContainer.classList.add("active2");
 		}
 	};
 

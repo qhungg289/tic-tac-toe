@@ -136,7 +136,6 @@ p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: background-color 0.2s;
 }
 
 .grid-item:nth-child(-n + 3) {
@@ -187,6 +186,50 @@ p {
 
 #name-container-2 {
 	border-bottom: 4px transparent solid;
+}
+
+#name-container-1.active1 {
+	animation: breathing1 3s ease-in-out infinite normal;
+}
+
+#name-container-2.active2 {
+	animation: breathing2 3s ease-in-out infinite normal;
+}
+
+@keyframes breathing1 {
+	0% {
+		border-bottom: 4px transparent solid;
+	}
+
+	25% {
+		border-bottom: 4px var(--player1indicator) solid;
+	}
+
+	60% {
+		border-bottom: 4px var(--player1indicator) solid;
+	}
+
+	100% {
+		border-bottom: 4px transparent solid;
+	}
+}
+
+@keyframes breathing2 {
+	0% {
+		border-bottom: 4px transparent solid;
+	}
+
+	25% {
+		border-bottom: 4px var(--player2indicator) solid;
+	}
+
+	60% {
+		border-bottom: 4px var(--player2indicator) solid;
+	}
+
+	100% {
+		border-bottom: 4px transparent solid;
+	}
 }
 
 .change-name {
