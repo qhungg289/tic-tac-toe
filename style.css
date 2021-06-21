@@ -23,6 +23,7 @@ h1 {
 	text-align: center;
 	font-size: 3rem;
 	color: var(--textcolor);
+	margin: 10px;
 }
 
 .modal {
