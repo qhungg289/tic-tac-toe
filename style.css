@@ -17,6 +17,10 @@ html {
 
 body {
 	background-color: var(--bgcolor);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 h1 {
@@ -80,10 +84,10 @@ p {
 }
 
 #main-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
+	display: grid;
+	grid-template-areas: "player1 play-area player2";
+	grid-template-columns: repeat(3, auto);
+	column-gap: 50px;
 }
 
 #play-area {
@@ -91,6 +95,7 @@ p {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	grid-area: play-area;
 }
 
 #grid-container {
@@ -171,6 +176,14 @@ p {
 	justify-content: center;
 	align-items: center;
 	width: inherit;
+}
+
+#player1 {
+	grid-area: player1;
+}
+
+#player2 {
+	grid-area: player2;
 }
 
 #player1-name,
@@ -294,4 +307,39 @@ input[type="button"]:hover {
 input[type="button"]:active {
 	box-shadow: 0 3px var(--textcolor);
 	transform: translateY(4px);
+}
+
+@media only screen and (max-width: 480px) {
+	#main-container {
+		grid-template-areas:
+			"play-area play-area"
+			"player1 player2";
+		grid-template-columns: auto auto;
+		grid-template-rows: auto auto;
+		margin-top: 15%;
+	}
+
+	#grid-container {
+		transform: scale(1.1);
+		margin-bottom: 5%;
+	}
+
+	.player-info {
+		width: auto;
+		transform: scale(0.8);
+	}
+
+	h1 {
+		display: none;
+	}
+
+	.modal-content {
+		width: 80%;
+		margin: 60% auto;
+	}
+
+	#restart-button {
+		margin-top: 5%;
+		width: auto;
+	}
 }
