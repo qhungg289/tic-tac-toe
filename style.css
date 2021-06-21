@@ -161,17 +161,8 @@ p {
 	justify-content: center;
 	align-items: center;
 	color: var(--textcolor);
-}
-
-#player1-name,
-#player2-name {
-	font-size: 30px;
-	margin-right: 10px;
-}
-
-#player1-score,
-#player2-score {
-	font-size: 70px;
+	width: 200px;
+	word-wrap: break-word;
 }
 
 .name-container {
@@ -179,6 +170,20 @@ p {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	width: inherit;
+}
+
+#player1-name,
+#player2-name {
+	font-size: 30px;
+	margin-right: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#player1-score,
+#player2-score {
+	font-size: 70px;
 }
 
 #name-container-1 {
