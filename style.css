@@ -336,6 +336,7 @@ input[type="button"]:active {
 	.modal-content {
 		width: 80%;
 		margin: 60% auto;
+		font-size: 1.5rem;
 	}
 
 	#restart-button {
