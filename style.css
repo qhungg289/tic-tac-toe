@@ -87,7 +87,7 @@ p {
 	display: grid;
 	grid-template-areas: "player1 play-area player2";
 	grid-template-columns: repeat(3, auto);
-	column-gap: 50px;
+	column-gap: 6vw;
 }
 
 #play-area {
@@ -166,7 +166,7 @@ p {
 	justify-content: center;
 	align-items: center;
 	color: var(--textcolor);
-	width: 200px;
+	width: 160px;
 	word-wrap: break-word;
 }
 
