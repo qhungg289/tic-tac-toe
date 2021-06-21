@@ -91,9 +91,9 @@ const GameController = ((arr, mark1, mark2) => {
 		if (document.getElementById("name-field-1").value == "") {
 			alert("Don't leave this empty!");
 		} else {
-			p1.setName(`${document.getElementById("name-field-1").value}`);
+			p1.setName(`${p1NameField.value}`);
 			p1Name.innerText = p1.getName();
-			document.getElementById("name-field-1").value = null;
+			p1NameField.value = null;
 			p1NameEditModal.classList.remove("active");
 			overlay.classList.remove("active");
 		}
@@ -103,9 +103,9 @@ const GameController = ((arr, mark1, mark2) => {
 		if (document.getElementById("name-field-2").value == "") {
 			alert("Don't leave this empty!");
 		} else {
-			p2.setName(`${document.getElementById("name-field-2").value}`);
+			p2.setName(`${p2NameField.value}`);
 			p2Name.innerText = p2.getName();
-			document.getElementById("name-field-2").value = null;
+			p2NameField.value = null;
 			p2NameEditModal.classList.remove("active");
 			overlay.classList.remove("active");
 		}
