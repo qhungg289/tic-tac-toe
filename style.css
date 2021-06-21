@@ -189,11 +189,11 @@ p {
 }
 
 #name-container-1.active1 {
-	animation: breathing1 3s ease-in-out infinite normal;
+	animation: breathing1 2s ease-in-out infinite normal;
 }
 
 #name-container-2.active2 {
-	animation: breathing2 3s ease-in-out infinite normal;
+	animation: breathing2 2s ease-in-out infinite normal;
 }
 
 @keyframes breathing1 {
