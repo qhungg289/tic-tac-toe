@@ -33,10 +33,7 @@ const GameBoard = (() => {
 			for (let j = 0; j < board[i].length; j++) {
 				let cell = document.createElement("button");
 				cell.innerText = board[i][j];
-				cell.addEventListener(
-					"click",
-					turnCheckAndMark.bind(this, cell, i, j)
-				);
+				cell.addEventListener("click", turnCheckAndMark.bind(this, cell, i, j));
 				cell.className = "grid-item";
 				cell.type = "button";
 				gridBoard.appendChild(cell);
@@ -163,11 +160,7 @@ const GameController = ((arr, mark1, mark2) => {
 			resultMessage.innerText = `${p2.getName()} is the winner 🎉!`;
 			p2.setScore();
 			p2Score.innerText = p2.getScore();
-		} else if (
-			move === 8 &&
-			p1.wonStatus === false &&
-			p2.wonStatus === false
-		) {
+		} else if (move === 8 && p1.wonStatus === false && p2.wonStatus === false) {
 			resultBox.classList.add("active");
 			overlay.classList.add("active");
 			resultMessage.innerText = "Tie!";
@@ -176,16 +169,14 @@ const GameController = ((arr, mark1, mark2) => {
 
 	const showTurnIndicator = () => {
 		if (turn === false) {
-			p1NameContainer.style.borderBottom =
-				"4px var(--player1indicator) solid";
+			p1NameContainer.style.borderBottom = "4px var(--player1indicator) solid";
 			p1NameContainer.classList.add("active1");
 			p2NameContainer.style.borderBottom = "4px transparent solid";
 			p2NameContainer.classList.remove("active2");
 		} else {
 			p1NameContainer.style.borderBottom = "4px transparent solid";
 			p1NameContainer.classList.remove("active1");
-			p2NameContainer.style.borderBottom =
-				"4px var(--player2indicator) solid";
+			p2NameContainer.style.borderBottom = "4px var(--player2indicator) solid";
 			p2NameContainer.classList.add("active2");
 		}
 	};
@@ -204,10 +195,7 @@ const GameController = ((arr, mark1, mark2) => {
 	};
 
 	window.onclick = (event) => {
-		if (
-			event.target == p1NameEditModal ||
-			event.target == p2NameEditModal
-		) {
+		if (event.target == p1NameEditModal || event.target == p2NameEditModal) {
 			p1NameEditModal.classList.remove("active");
 			p2NameEditModal.classList.remove("active");
 			overlay.classList.remove("active");
