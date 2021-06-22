@@ -76,6 +76,133 @@ const GameController = ((arr, mark1, mark2) => {
 	p1Score.innerText = p1.getScore();
 	p2Score.innerText = p2.getScore();
 
+	const checkTurnAndMarking = (cell, index1, index2) => {
+		if (turn === true && cell.innerHTML === "") {
+			cell.innerHTML = `<i class="fas fa-times"></i>`;
+			cell.style.color = "var(--player1indicator)";
+			cell.style.textShadow = "0 4px var(--textcolor)";
+			arr[index1][index2] = mark1;
+			checkWonStatus();
+			checkForWinner();
+			showTurnIndicator();
+			++move;
+			turn = false;
+			cell.disabled = true;
+		} else if (turn === false && cell.innerHTML === "") {
+			cell.innerHTML = `<i class="far fa-circle"></i>`;
+			cell.style.color = "var(--player2indicator)";
+			cell.style.textShadow = "0 4px var(--textcolor)";
+			arr[index1][index2] = mark2;
+			checkWonStatus();
+			checkForWinner();
+			showTurnIndicator();
+			++move;
+			turn = true;
+			cell.disabled = true;
+		}
+	};
+
+	const checkWonStatus = () => {
+		// Check for X
+		if (
+			// Horizontal
+			(arr[0][0] === "x" && arr[0][1] === "x" && arr[0][2] === "x") ||
+			(arr[1][0] === "x" && arr[1][1] === "x" && arr[1][2] === "x") ||
+			(arr[2][0] === "x" && arr[2][1] === "x" && arr[2][2] === "x")
+		) {
+			p1.wonStatus = true;
+		} else if (
+			// Vertical
+			(arr[0][0] === "x" && arr[1][0] === "x" && arr[2][0] === "x") ||
+			(arr[0][1] === "x" && arr[1][1] === "x" && arr[2][1] === "x") ||
+			(arr[0][2] === "x" && arr[1][2] === "x" && arr[2][2] === "x")
+		) {
+			p1.wonStatus = true;
+		} else if (
+			// Diagonal
+			(arr[0][2] === "x" && arr[1][1] === "x" && arr[2][0] === "x") ||
+			(arr[0][0] === "x" && arr[1][1] === "x" && arr[2][2] === "x")
+		) {
+			p1.wonStatus = true;
+		}
+
+		// Check for O
+		if (
+			// Horizontal
+			(arr[0][0] === "o" && arr[0][1] === "o" && arr[0][2] === "o") ||
+			(arr[1][0] === "o" && arr[1][1] === "o" && arr[1][2] === "o") ||
+			(arr[2][0] === "o" && arr[2][1] === "o" && arr[2][2] === "o")
+		) {
+			p2.wonStatus = true;
+		} else if (
+			// Vertical
+			(arr[0][0] === "o" && arr[1][0] === "o" && arr[2][0] === "o") ||
+			(arr[0][1] === "o" && arr[1][1] === "o" && arr[2][1] === "o") ||
+			(arr[0][2] === "o" && arr[1][2] === "o" && arr[2][2] === "o")
+		) {
+			p2.wonStatus = true;
+		} else if (
+			// Diagonal
+			(arr[0][2] === "o" && arr[1][1] === "o" && arr[2][0] === "o") ||
+			(arr[0][0] === "o" && arr[1][1] === "o" && arr[2][2] === "o")
+		) {
+			p2.wonStatus = true;
+		}
+	};
+
+	const checkForWinner = () => {
+		if (p1.wonStatus === true) {
+			resultBox.classList.add("active");
+			overlay.classList.add("active");
+			resultMessage.innerText = `${p1.getName()} is the winner 🎉!`;
+			p1.setScore();
+			p1Score.innerText = p1.getScore();
+		} else if (p2.wonStatus === true) {
+			resultBox.classList.add("active");
+			overlay.classList.add("active");
+			resultMessage.innerText = `${p2.getName()} is the winner 🎉!`;
+			p2.setScore();
+			p2Score.innerText = p2.getScore();
+		} else if (
+			move === 8 &&
+			p1.wonStatus === false &&
+			p2.wonStatus === false
+		) {
+			resultBox.classList.add("active");
+			overlay.classList.add("active");
+			resultMessage.innerText = "Tie!";
+		}
+	};
+
+	const showTurnIndicator = () => {
+		if (turn === false) {
+			p1NameContainer.style.borderBottom =
+				"4px var(--player1indicator) solid";
+			p1NameContainer.classList.add("active1");
+			p2NameContainer.style.borderBottom = "4px transparent solid";
+			p2NameContainer.classList.remove("active2");
+		} else {
+			p1NameContainer.style.borderBottom = "4px transparent solid";
+			p1NameContainer.classList.remove("active1");
+			p2NameContainer.style.borderBottom =
+				"4px var(--player2indicator) solid";
+			p2NameContainer.classList.add("active2");
+		}
+	};
+
+	const reRenderBoard = () => {
+		[...gridItems].forEach((e) => e.parentNode.removeChild(e));
+		for (let i = 0; i < arr.length; i++) {
+			for (let j = 0; j < arr[i].length; j++) {
+				arr[i][j] = "";
+			}
+		}
+		move = 0;
+		p1.wonStatus = false;
+		p2.wonStatus = false;
+		GameBoard.renderBoard(GameController.checkTurnAndMarking);
+	};
+
 	window.onclick = (event) => {
 		if (
 			event.target == p1NameEditModal ||
@@ -123,21 +250,6 @@ const GameController = ((arr, mark1, mark2) => {
 		}
 	});
 
-	newMatchButton.onclick = () => {
-		[...gridItems].forEach((e) => e.parentNode.removeChild(e));
-		for (let i = 0; i < arr.length; i++) {
-			for (let j = 0; j < arr[i].length; j++) {
-				arr[i][j] = "";
-			}
-		}
-		move = 0;
-		p1.wonStatus = false;
-		p2.wonStatus = false;
-		resultBox.classList.remove("active");
-		overlay.classList.remove("active");
-		GameBoard.renderBoard(GameController.turnCheckAndMark);
-	};
-
 	p1NameEditBtn.onclick = () => {
 		p1NameEditModal.classList.add("active");
 		overlay.classList.add("active");
@@ -148,183 +260,17 @@ const GameController = ((arr, mark1, mark2) => {
 		overlay.classList.add("active");
 	};
 
+	newMatchButton.onclick = () => {
+		reRenderBoard();
+		resultBox.classList.remove("active");
+		overlay.classList.remove("active");
+	};
+
 	restartButton.onclick = () => {
-		[...gridItems].forEach((e) => e.parentNode.removeChild(e));
-		for (let i = 0; i < arr.length; i++) {
-			for (let j = 0; j < arr[i].length; j++) {
-				arr[i][j] = "";
-			}
-		}
-		move = 0;
-		p1.wonStatus = false;
-		p2.wonStatus = false;
-		GameBoard.renderBoard(GameController.turnCheckAndMark);
+		reRenderBoard();
 	};
 
-	const turnCheckAndMark = (cell, index1, index2) => {
-		if (turn === true && cell.innerHTML === "") {
-			cell.innerHTML = `<i class="fas fa-times"></i>`;
-			cell.style.color = "var(--player1indicator)";
-			cell.style.textShadow = "0 4px var(--textcolor)";
-			arr[index1][index2] = mark1;
-			checkWon();
-			winnerFound();
-			turnIndicator();
-			++move;
-			turn = false;
-			cell.disabled = true;
-		} else if (turn === false && cell.innerHTML === "") {
-			cell.innerHTML = `<i class="far fa-circle"></i>`;
-			cell.style.color = "var(--player2indicator)";
-			cell.style.textShadow = "0 4px var(--textcolor)";
-			arr[index1][index2] = mark2;
-			checkWon();
-			winnerFound();
-			turnIndicator();
-			++move;
-			turn = true;
-			cell.disabled = true;
-		}
-	};
+	GameBoard.renderBoard(checkTurnAndMarking);
 
-	GameBoard.renderBoard(turnCheckAndMark);
-
-	// Check for winner
-	const checkWon = () => {
-		// Check for X
-		if (arr[0][0] === "x" && arr[0][1] === "x" && arr[0][2] === "x") {
-			p1.wonStatus = true;
-		} else if (
-			arr[1][0] === "x" &&
-			arr[1][1] === "x" &&
-			arr[1][2] === "x"
-		) {
-			p1.wonStatus = true;
-		} else if (
-			arr[2][0] === "x" &&
-			arr[2][1] === "x" &&
-			arr[2][2] === "x"
-		) {
-			p1.wonStatus = true;
-		} else if (
-			arr[0][0] === "x" &&
-			arr[1][0] === "x" &&
-			arr[2][0] === "x"
-		) {
-			p1.wonStatus = true;
-		} else if (
-			arr[0][1] === "x" &&
-			arr[1][1] === "x" &&
-			arr[2][1] === "x"
-		) {
-			p1.wonStatus = true;
-		} else if (
-			arr[0][2] === "x" &&
-			arr[1][2] === "x" &&
-			arr[2][2] === "x"
-		) {
-			p1.wonStatus = true;
-		} else if (
-			arr[0][2] === "x" &&
-			arr[1][1] === "x" &&
-			arr[2][0] === "x"
-		) {
-			p1.wonStatus = true;
-		} else if (
-			arr[0][0] === "x" &&
-			arr[1][1] === "x" &&
-			arr[2][2] === "x"
-		) {
-			p1.wonStatus = true;
-		}
-
-		// Check for O
-		if (arr[0][0] === "o" && arr[0][1] === "o" && arr[0][2] === "o") {
-			p2.wonStatus = true;
-		} else if (
-			arr[1][0] === "o" &&
-			arr[1][1] === "o" &&
-			arr[1][2] === "o"
-		) {
-			p2.wonStatus = true;
-		} else if (
-			arr[2][0] === "o" &&
-			arr[2][1] === "o" &&
-			arr[2][2] === "o"
-		) {
-			p2.wonStatus = true;
-		} else if (
-			arr[0][0] === "o" &&
-			arr[1][0] === "o" &&
-			arr[2][0] === "o"
-		) {
-			p2.wonStatus = true;
-		} else if (
-			arr[0][1] === "o" &&
-			arr[1][1] === "o" &&
-			arr[2][1] === "o"
-		) {
-			p2.wonStatus = true;
-		} else if (
-			arr[0][2] === "o" &&
-			arr[1][2] === "o" &&
-			arr[2][2] === "o"
-		) {
-			p2.wonStatus = true;
-		} else if (
-			arr[0][2] === "o" &&
-			arr[1][1] === "o" &&
-			arr[2][0] === "o"
-		) {
-			p2.wonStatus = true;
-		} else if (
-			arr[0][0] === "o" &&
-			arr[1][1] === "o" &&
-			arr[2][2] === "o"
-		) {
-			p2.wonStatus = true;
-		}
-	};
-
-	const winnerFound = () => {
-		if (p1.wonStatus === true) {
-			resultBox.classList.add("active");
-			overlay.classList.add("active");
-			resultMessage.innerText = `${p1.getName()} is the winner 🎉!`;
-			p1.setScore();
-			p1Score.innerText = p1.getScore();
-		} else if (p2.wonStatus === true) {
-			resultBox.classList.add("active");
-			overlay.classList.add("active");
-			resultMessage.innerText = `${p2.getName()} is the winner 🎉!`;
-			p2.setScore();
-			p2Score.innerText = p2.getScore();
-		} else if (
-			move === 8 &&
-			p1.wonStatus === false &&
-			p2.wonStatus === false
-		) {
-			resultBox.classList.add("active");
-			overlay.classList.add("active");
-			resultMessage.innerText = "Tie!";
-		}
-	};
-
-	const turnIndicator = () => {
-		if (turn === false) {
-			p1NameContainer.style.borderBottom =
-				"4px var(--player1indicator) solid";
-			p1NameContainer.classList.add("active1");
-			p2NameContainer.style.borderBottom = "4px transparent solid";
-			p2NameContainer.classList.remove("active2");
-		} else {
-			p1NameContainer.style.borderBottom = "4px transparent solid";
-			p1NameContainer.classList.remove("active1");
-			p2NameContainer.style.borderBottom =
-				"4px var(--player2indicator) solid";
-			p2NameContainer.classList.add("active2");
-		}
-	};
-
-	return { turnCheckAndMark };
+	return { checkTurnAndMarking };
 })(GameBoard.board, p1.mark, p2.mark);
