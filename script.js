@@ -1,5 +1,6 @@
 let turn = true;
 let move = 0;
+let isBot = false;
 
 const Player = (mark) => {
 	let _name = "";
