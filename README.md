@@ -1,5 +1,9 @@
-# tic-tac-toe
+# tic-tac-toe ❌ ⭕
 
-![Screenshot](https://i.imgur.com/gW28U5F.png)
+This was made for learning purpose at **The Odin Project**.
 
-[Live preview](https://qhungg289.github.io/tic-tac-toe/)
+[Live demo](https://qhungg289.github.io/tic-tac-toe/).
+
+**Preview**:
+
+![Screenshot](./asset/readme-tic-tac-toe.png)
