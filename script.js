@@ -1,3 +1,7 @@
+/* 
+	Made by Duong Quang Hung
+*/
+
 let turn = true;
 let move = 0;
 
